@@ -1,0 +1,336 @@
+/* FormStrong Magazine - Additional Styles */
+
+/* Brand Colors */
+:root {
+  --formstrong-primary: #007bff;
+  --formstrong-secondary: #6c757d;
+  --formstrong-success: #28a745;
+  --formstrong-warning: #ffc107;
+  --formstrong-danger: #dc3545;
+  --formstrong-light: #f8f9fa;
+  --formstrong-dark: #343a40;
+}
+
+/* Typography */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Crimson Text', serif;
+  line-height: 1.7;
+  color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* Navigation */
+.site-nav {
+  background: var(--formstrong-dark);
+  padding: 1rem 0;
+  margin-bottom: 2rem;
+}
+
+.site-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.site-nav a {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.3s;
+}
+
+.site-nav a:hover {
+  background: var(--formstrong-primary);
+}
+
+/* Magazine-specific components */
+.issue-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.issue-card {
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.issue-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.issue-card-header {
+  background: linear-gradient(135deg, var(--formstrong-primary), #764ba2);
+  color: white;
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.issue-card-body {
+  padding: 1.5rem;
+}
+
+/* Repost components */
+.repost-snippet {
+  background: var(--formstrong-light);
+  border-left: 4px solid var(--formstrong-primary);
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.author-attribution {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: var(--formstrong-secondary);
+}
+
+.author-attribution img {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+}
+
+/* Tags and categories */
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.tag {
+  background: var(--formstrong-light);
+  color: var(--formstrong-dark);
+  padding: 0.25rem 0.75rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  text-decoration: none;
+  border: 1px solid #dee2e6;
+  transition: all 0.3s;
+}
+
+.tag:hover {
+  background: var(--formstrong-primary);
+  color: white;
+  border-color: var(--formstrong-primary);
+}
+
+/* Stats and metrics */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--formstrong-primary);
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--formstrong-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Call-to-action buttons */
+.cta-button {
+  background: var(--formstrong-primary);
+  color: white;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s;
+  text-align: center;
+}
+
+.cta-button:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.cta-secondary {
+  background: transparent;
+  color: var(--formstrong-primary);
+  border: 2px solid var(--formstrong-primary);
+}
+
+.cta-secondary:hover {
+  background: var(--formstrong-primary);
+  color: white;
+}
+
+/* Footer */
+.site-footer {
+  background: var(--formstrong-dark);
+  color: white;
+  padding: 3rem 0 2rem 0;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.footer-section h4 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.footer-section a {
+  color: #ccc;
+  text-decoration: none;
+  line-height: 1.8;
+}
+
+.footer-section a:hover {
+  color: var(--formstrong-primary);
+}
+
+/* Print styles */
+@media print {
+  .site-nav,
+  .footer,
+  .cta-button,
+  .share-buttons {
+    display: none !important;
+  }
+  
+  body {
+    font-size: 12pt;
+    line-height: 1.4;
+  }
+  
+  .issue-card,
+  .repost-snippet {
+    page-break-inside: avoid;
+  }
+  
+  a::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .site-nav ul {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .issue-grid,
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+  
+  .cta-button {
+    display: block;
+    margin: 1rem auto;
+  }
+}
+
+/* Animation utilities */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* Loading states */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--formstrong-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-color: #1a1a1a;
+    --text-color: #e0e0e0;
+    --card-bg: #2d2d2d;
+  }
+  
+  body {
+    background: var(--bg-color);
+    color: var(--text-color);
+  }
+  
+  .issue-card,
+  .stat-card {
+    background: var(--card-bg);
+    border-color: #444;
+  }
+  
+  .repost-snippet {
+    background: var(--card-bg);
+  }
+}

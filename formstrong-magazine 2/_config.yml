@@ -1,0 +1,50 @@
+# FormStrong Magazine - Jekyll Configuration
+title: "FormStrong Magazine"
+description: "Curating the Most Pertinent Reposts of Our Times"
+url: "https://formstrong11.github.io"
+baseurl: "/formstrong-magazine"
+
+# Site settings
+author: "FormStrong Team"
+email: "hello@formstrong.com"
+twitter_username: "buildft"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:title/
+
+# Collections for magazine issues
+collections:
+  issues:
+    output: true
+    permalink: /:collection/:name/
+  reposts:
+    output: true
+    permalink: /:collection/:title/
+
+# Plugin settings
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Theme
+theme: minima
+
+# Magazine specific settings
+current_issue: 1
+issues_per_page: 12
+reposts_per_page: 20
+
+# Social media
+social:
+  twitter: buildft
+  instagram: formstrong
+  facebook: formstrong
+
+# Magazine metadata
+magazine:
+  founded: 2024
+  frequency: "Monthly"
+  tagline: "Signal vs Noise in the Digital Age"

@@ -1,0 +1,464 @@
+---
+layout: default
+---
+
+<article class="formstrong-repost-full">
+  <header class="repost-full-header">
+    <div class="breadcrumb">
+      <a href="/">FormStrong</a> → 
+      <a href="/issues/issue-{{ page.issue }}">Issue #{{ page.issue }}</a> → 
+      <span>{{ page.title }}</span>
+    </div>
+    
+    <h1>{{ page.title }}</h1>
+    
+    <div class="repost-meta">
+      <div class="original-info">
+        <img src="{{ page.author_avatar | default: '/assets/images/default-avatar.png' }}" 
+             alt="@{{ page.original_author }}" class="author-avatar-large">
+        <div class="author-details">
+          <h3>@{{ page.original_author }}</h3>
+          <time class="original-date">{{ page.original_date | date: "%B %d, %Y at %I:%M %p" }}</time>
+          <a href="{{ page.original_url }}" target="_blank" class="view-original">View Original Post</a>
+        </div>
+      </div>
+      
+      <div class="curation-info">
+        <p class="curated-by">Curated by @buildft</p>
+        <time class="curation-date">{{ page.date | date: "%B %d, %Y" }}</time>
+        <div class="category-tags">
+          {% for tag in page.tags %}
+          <span class="tag">#{{ tag }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="repost-content">
+    <section class="original-post-section">
+      <h2>Original Post</h2>
+      <blockquote class="original-post-large">
+        {{ page.original_content }}
+      </blockquote>
+      
+      {% if page.original_media %}
+      <div class="original-media">
+        {% for media in page.original_media %}
+        <img src="{{ media.url }}" alt="{{ media.alt }}" class="post-media">
+        {% endfor %}
+      </div>
+      {% endif %}
+      
+      {% if page.engagement %}
+      <div class="engagement-stats">
+        <h4>Original Engagement:</h4>
+        <ul>
+          {% if page.engagement.likes %}<li><strong>{{ page.engagement.likes }}</strong> likes</li>{% endif %}
+          {% if page.engagement.retweets %}<li><strong>{{ page.engagement.retweets }}</strong> retweets</li>{% endif %}
+          {% if page.engagement.replies %}<li><strong>{{ page.engagement.replies }}</strong> replies</li>{% endif %}
+        </ul>
+      </div>
+      {% endif %}
+    </section>
+
+    <section class="formstrong-analysis">
+      <h2>FormStrong Analysis</h2>
+      
+      {% if page.formstrong_commentary %}
+      <div class="commentary">
+        <h3>Why This Matters</h3>
+        {{ page.formstrong_commentary | markdownify }}
+      </div>
+      {% endif %}
+      
+      {% if page.context %}
+      <div class="context">
+        <h3>Context & Background</h3>
+        {{ page.context | markdownify }}
+      </div>
+      {% endif %}
+      
+      {% if page.implications %}
+      <div class="implications">
+        <h3>Broader Implications</h3>
+        {{ page.implications | markdownify }}
+      </div>
+      {% endif %}
+      
+      {% if page.related_topics %}
+      <div class="related-topics">
+        <h3>Related Topics</h3>
+        <ul>
+          {% for topic in page.related_topics %}
+          <li>{{ topic }}</li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </section>
+
+    {% if content and content != empty %}
+    <section class="additional-content">
+      <h2>Extended Commentary</h2>
+      {{ content }}
+    </section>
+    {% endif %}
+  </main>
+
+  <aside class="repost-sidebar">
+    <div class="sharing">
+      <h4>Share This Analysis</h4>
+      <div class="share-buttons">
+        <a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.url }}{{ page.url }}" 
+           target="_blank" class="share-twitter">Twitter</a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.url }}{{ page.url }}" 
+           target="_blank" class="share-facebook">Facebook</a>
+        <a href="mailto:?subject={{ page.title | url_encode }}&body={{ site.url }}{{ page.url }}" 
+           class="share-email">Email</a>
+      </div>
+    </div>
+    
+    {% assign related_reposts = site.reposts | where: "category", page.category | where_exp: "item", "item.url != page.url" | limit: 3 %}
+    {% if related_reposts.size > 0 %}
+    <div class="related-reposts">
+      <h4>Related Reposts</h4>
+      {% for repost in related_reposts %}
+      <article class="related-item">
+        <h5><a href="{{ repost.url }}">{{ repost.title }}</a></h5>
+        <p class="related-meta">@{{ repost.original_author }} • {{ repost.date | date: "%b %d" }}</p>
+      </article>
+      {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="issue-link">
+      <h4>From This Issue</h4>
+      <a href="/issues/issue-{{ page.issue }}" class="issue-button">
+        View Issue #{{ page.issue }}
+      </a>
+    </div>
+  </aside>
+
+  <footer class="repost-footer">
+    <div class="attribution">
+      <p>Original content © {{ page.original_author }} • Analysis © FormStrong Magazine</p>
+      <p>Curated and analyzed by the FormStrong team. <a href="/about">Learn about our curation process</a>.</p>
+    </div>
+    
+    <div class="newsletter-signup">
+      <h4>Stay Updated</h4>
+      <p>Get notified when new issues are published</p>
+      <a href="mailto:hello@formstrong.com?subject=Magazine Subscription" class="subscribe-button">
+        Subscribe to FormStrong
+      </a>
+    </div>
+  </footer>
+</article>
+
+<style>
+.formstrong-repost-full {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 2rem;
+  font-family: 'Georgia', serif;
+  line-height: 1.6;
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.repost-full-header h1 {
+  font-size: 2.5rem;
+  margin: 1rem 0;
+  color: #333;
+}
+
+.repost-meta {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.original-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar-large {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.author-details h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.original-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.view-original {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 0.5rem;
+  display: inline-block;
+}
+
+.curation-info {
+  text-align: right;
+}
+
+.curated-by {
+  font-weight: bold;
+  margin: 0;
+}
+
+.curation-date {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.category-tags {
+  margin-top: 1rem;
+}
+
+.tag {
+  background: #e9ecef;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-right: 0.5rem;
+}
+
+.repost-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  margin: 3rem 0;
+}
+
+.original-post-section,
+.formstrong-analysis {
+  grid-column: 1;
+}
+
+.repost-sidebar {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+}
+
+.original-post-large {
+  background: #f8f9fa;
+  padding: 2rem;
+  border-left: 6px solid #007bff;
+  font-size: 1.2rem;
+  font-style: italic;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+}
+
+.original-media img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.engagement-stats {
+  background: #e9ecef;
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+}
+
+.engagement-stats ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.5rem 0 0 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.formstrong-analysis {
+  margin-top: 3rem;
+}
+
+.commentary,
+.context,
+.implications {
+  background: #fff3cd;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border-left: 4px solid #ffc107;
+  margin: 2rem 0;
+}
+
+.commentary h3,
+.context h3,
+.implications h3 {
+  margin-top: 0;
+  color: #856404;
+}
+
+.related-topics ul {
+  list-style: none;
+  padding: 0;
+}
+
+.related-topics li {
+  background: #e9ecef;
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  border-radius: 4px;
+}
+
+.repost-sidebar {
+  position: sticky;
+  top: 2rem;
+  height: fit-content;
+}
+
+.sharing,
+.related-reposts,
+.issue-link {
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.share-buttons a {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.share-twitter { background: #1da1f2; color: white; }
+.share-facebook { background: #4267b2; color: white; }
+.share-email { background: #333; color: white; }
+
+.related-item {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.related-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.related-item h5 {
+  margin: 0 0 0.5rem 0;
+}
+
+.related-item a {
+  color: #333;
+  text-decoration: none;
+}
+
+.related-meta {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.issue-button,
+.subscribe-button {
+  background: #007bff;
+  color: white;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.repost-footer {
+  border-top: 2px solid #dee2e6;
+  padding-top: 2rem;
+  margin-top: 3rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.attribution {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.newsletter-signup {
+  text-align: center;
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .repost-meta {
+    grid-template-columns: 1fr;
+  }
+  
+  .repost-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .repost-sidebar {
+    grid-column: 1;
+    grid-row: auto;
+    position: static;
+  }
+  
+  .repost-footer {
+    grid-template-columns: 1fr;
+  }
+  
+  .share-buttons {
+    flex-direction: column;
+  }
+}
+
+@media print {
+  .repost-sidebar,
+  .sharing,
+  .newsletter-signup {
+    display: none;
+  }
+  
+  .repost-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .formstrong-repost-full {
+    max-width: none;
+    padding: 1rem;
+  }
+}
+</style>
