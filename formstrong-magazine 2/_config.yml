@@ -2,7 +2,7 @@
 title: "FormStrong Magazine"
 description: "Curating the Most Pertinent Reposts of Our Times"
 url: "https://formstrong11.github.io"
-baseurl: "/formstrong-magazine"
+baseurl: "/formstrong-magazine-"
 
 # Site settings
 author: "FormStrong Team"
